@@ -17,9 +17,18 @@
   </head>
   <body>
     <div id="map"></div>
+
+    <!-- Add a form to take X and Y coordinates -->
+    <form action="" method="post" class="forma" id="formular">
+      <label for="xinput">X Position:</label>
+      <input type="text" id="xinput" name="xpoz" />
+      <label for="yinput">Y Position:</label>
+      <input type="text" id="yinput" name="ypoz" />
+      <input type="submit" name="submit" value="Find" class="btn btn-light" />
+    </form>
   </body>
 </html>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!-- Leaflet JS  -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 

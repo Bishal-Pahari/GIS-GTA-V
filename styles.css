@@ -4,7 +4,56 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Arial", sans-serif;
+}
+
 #map {
-  height: 100vw;
-  width: 100vw;
+  height: 100vh;
+  width: 100%;
+}
+
+form {
+  display: block;
+  margin-top: 1em; /* Add some space at the top */
+  margin-bottom: 1em; /* Add some space at the bottom */
+  text-align: center;
+}
+
+.forma {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+form input {
+  padding: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+form button {
+  padding: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #2980b9;
 }

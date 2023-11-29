@@ -21,29 +21,29 @@ CUSTOM_CRS = L.extend({}, L.CRS.Simple, {
 });
 
 var SateliteStyle = L.tileLayer("mapStyles/styleSatelite/{z}/{x}/{y}.jpg", {
-    minZoom: 0,
-    maxZoom: 8,
-    noWrap: true,
-    continuousWorld: false,
-    attribution: "Online map GTA V",
-    id: "SateliteStyle map",
-  }),
-  AtlasStyle = L.tileLayer("mapStyles/styleAtlas/{z}/{x}/{y}.jpg", {
-    minZoom: 0,
-    maxZoom: 5,
-    noWrap: true,
-    continuousWorld: false,
-    attribution: "Online map GTA V",
-    id: "styleAtlas map",
-  }),
-  GridStyle = L.tileLayer("mapStyles/styleGrid/{z}/{x}/{y}.png", {
-    minZoom: 0,
-    maxZoom: 5,
-    noWrap: true,
-    continuousWorld: false,
-    attribution: "Online map GTA V",
-    id: "styleGrid map",
-  });
+  minZoom: 0,
+  maxZoom: 8,
+  noWrap: true,
+  continuousWorld: false,
+  attribution: "Self-driving-car-Project",
+  id: "SateliteStyle map",
+});
+var AtlasStyle = L.tileLayer("mapStyles/styleAtlas/{z}/{x}/{y}.jpg", {
+  minZoom: 0,
+  maxZoom: 5,
+  noWrap: true,
+  continuousWorld: false,
+  attribution: "Self-driving-car-Project",
+  id: "styleAtlas map",
+});
+var GridStyle = L.tileLayer("mapStyles/styleGrid/{z}/{x}/{y}.png", {
+  minZoom: 0,
+  maxZoom: 5,
+  noWrap: true,
+  continuousWorld: false,
+  attribution: "Self-driving-car-Project",
+  id: "styleGrid map",
+});
 
 var ExampleGroup = L.layerGroup();
 
@@ -53,33 +53,70 @@ var Icons = {
 
 var mymap = L.map("map", {
   crs: CUSTOM_CRS,
-  minZoom: 1,
-  maxZoom: 5,
-  zoom: 5, // Corrected property name
-  maxNativeZoom: 5,
+  minZoom: 4.5,
+  maxZoom: 4.5,
+  Zoom: 4.5,
+  maxNativeZoom: 4.5,
   preferCanvas: true,
-  layers: [SateliteStyle],
+  layers: [SateliteStyle, Icons["Example"]],
   center: [0, 0],
+  zoom: 4.5,
+  scrollWheelZoom: false,
 });
 
 var layersControl = L.control
-  .layers(
-    { Satelite: SateliteStyle, Atlas: AtlasStyle, Grid: GridStyle },
-    Icons
-  )
+  .layers({
+    Satelite: SateliteStyle,
+    Atlas: AtlasStyle,
+    Grid: GridStyle,
+  })
   .addTo(mymap);
 
-function customIcon(icon) {
+function customIcon() {
   return L.icon({
-    iconUrl: `blips/${icon}.png`,
-    iconSize: [20, 20],
-    iconAnchor: [20, 20],
-    popupAnchor: [-10, -27],
+    iconUrl: "./blips/1.png",
+    iconSize: [55, 55],
+    iconAnchor: [30, 45],
+    popupAnchor: [0, -30],
   });
 }
 
-var X = 0;
-var Y = 0;
-L.marker([Y, X], { icon: customIcon(1) })
-  .addTo(Icons["Example"])
-  .bindPopup("I am here.");
+var marker;
+mymap.on("click", function (e) {
+  var coord = e.latlng;
+  var lat = coord.lat;
+  var lng = coord.lng;
+
+  // Clear existing markers in ExampleGroup
+  ExampleGroup.clearLayers();
+
+  // Add a new marker
+  var marker = L.marker([lat, lng], { icon: customIcon() })
+    .addTo(ExampleGroup)
+    .bindPopup("<b>X: " + lng.toFixed(3) + " | Y: " + lat.toFixed(3) + "</b>");
+});
+
+// Event handler for form submission
+$("#formular").submit(function (event) {
+  event.preventDefault();
+  if ($.trim($("#xinput").val()) === "" || $.trim($("#yinput").val()) === "") {
+    alert("Please fill X and Y coords");
+    return false;
+  }
+
+  var xpoz = $("#xinput").val();
+  var ypoz = $("#yinput").val();
+
+  // Clear existing markers in ExampleGroup
+  ExampleGroup.clearLayers();
+
+  // Add a new marker
+  var azurirajmarker = L.marker([ypoz, xpoz], { icon: customIcon() })
+    .addTo(ExampleGroup)
+    .bindPopup("<b>X: " + xpoz + " | Y: " + ypoz + "</b>");
+
+  mymap.setView([ypoz, xpoz], mymap.getZoom());
+  $("#markerSkripta")
+    .empty()
+    .append("<script>" + azurirajmarker + "</script>");
+});
