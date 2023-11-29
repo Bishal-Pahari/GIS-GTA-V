@@ -62,6 +62,7 @@ var mymap = L.map("map", {
   center: [0, 0],
   zoom: 4.5,
   scrollWheelZoom: false,
+  attributionControl: false,
 });
 
 var layersControl = L.control
