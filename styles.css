@@ -15,15 +15,18 @@ body {
 
 form {
   display: block;
-  margin-top: 1em; /* Add some space at the top */
-  margin-bottom: 1em; /* Add some space at the bottom */
+  margin-top: 1em;
+  margin-bottom: 1em;
   text-align: center;
 }
 
 .forma {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+
   z-index: 999;
   background: rgba(0, 0, 0, 0.7);
   padding: 10px;

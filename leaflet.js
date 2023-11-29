@@ -29,6 +29,15 @@ var SateliteStyle = L.tileLayer("mapStyles/styleSatelite/{z}/{x}/{y}.jpg", {
   id: "SateliteStyle map",
 });
 
+var AtlasStyle = L.tileLayer("mapStyles/styleAtlas/{z}/{x}/{y}.jpg", {
+  minZoom: 0,
+  maxZoom: 5,
+  noWrap: true,
+  continuousWorld: false,
+  attribution: "Self-driving-car-Project",
+  id: "styleAtlas map",
+});
+
 var ExampleGroup = L.layerGroup();
 
 var Icons = {
@@ -42,7 +51,7 @@ var mymap = L.map("map", {
   Zoom: 4.5,
   maxNativeZoom: 4.5,
   preferCanvas: true,
-  layers: [SateliteStyle, Icons["Example"]],
+  layers: [AtlasStyle, Icons["Example"]], // Change the order to make AtlasStyle the default
   center: [0, 0],
   zoom: 4.5,
   scrollWheelZoom: false,
@@ -52,7 +61,8 @@ var mymap = L.map("map", {
 
 var layersControl = L.control
   .layers({
-    Satelite: SateliteStyle,
+    "Atlas Style": AtlasStyle,
+    "Satelite Style": SateliteStyle, // Optional: Include SateliteStyle in the layer control
   })
   .addTo(mymap);
 
