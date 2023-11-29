@@ -1,0 +1,10 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#map {
+  height: 100vw;
+  width: 100vw;
+}
