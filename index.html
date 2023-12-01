@@ -19,6 +19,15 @@
   <body>
     <div id="map"></div>
 
+    <!-- Search container -->
+    <div class="search-container">
+      <div class="searchInput">
+        <input type="text" placeholder="Search" />
+        <div class="resultBox"></div>
+        <div class="icon"><i class="fas fa-search"></i></div>
+      </div>
+    </div>
+
     <!-- Add a form to take X and Y coordinates -->
     <form action="" method="post" class="forma" id="formular">
       <label for="xinput">X Position:</label>
@@ -33,4 +42,6 @@
 <!-- Leaflet JS  -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+<!-- search Auto Suggestion -->
+<script src="autoSuggestion.js"></script>
 <script src="leaflet.js"></script>
