@@ -61,8 +61,8 @@ var mymap = L.map("map", {
 
 var layersControl = L.control
   .layers({
-    "Atlas Style": AtlasStyle,
-    "Satelite Style": SateliteStyle, // Optional: Include SateliteStyle in the layer control
+    Atlas: AtlasStyle,
+    // Satelite: SateliteStyle,
   })
   .addTo(mymap);
 
