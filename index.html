@@ -15,6 +15,14 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     />
+
+    <!-- font CDN  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="map"></div>
@@ -22,7 +30,12 @@
     <!-- Search container -->
     <div class="search-container">
       <div class="searchInput">
-        <input type="text" class="textbox" placeholder="Search" />
+        <input
+          type="text"
+          class="textbox"
+          placeholder="Search"
+          spellcheck="false"
+        />
         <div class="resultBox"></div>
       </div>
     </div>
@@ -42,5 +55,5 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <!-- search Auto Suggestion -->
-<script src="autoSuggestion.js"></script>
-<script src="leaflet.js"></script>
+<script src="./scripts/autoSuggestion.js"></script>
+<script src="./scripts/leaflet.js"></script>
