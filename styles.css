@@ -72,6 +72,7 @@ input:focus {
   color: #fff;
   font-size: 1.5rem;
   user-select: none;
+  outline: 1px solid #00f44d;
 }
 
 .searchInput.active .resultBox {
