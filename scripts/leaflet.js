@@ -66,7 +66,7 @@ var layersControl = L.control
   })
   .addTo(mymap);
 
-function customIcon() {
+function customIconOrigin() {
   return L.icon({
     iconUrl: "./blips/1.png",
     iconSize: [55, 55],
@@ -75,41 +75,40 @@ function customIcon() {
   });
 }
 
-var marker;
+function customIconDestination() {
+  return L.icon({
+    iconUrl: "./blips/3.png",
+    iconSize: [55, 55],
+    iconAnchor: [30, 45],
+    popupAnchor: [0, -30],
+  });
+}
+
+// MAP 1 Marker
+var marker1;
 mymap.on("click", function (e) {
   var coord = e.latlng;
   var lat = coord.lat;
   var lng = coord.lng;
 
-  // Clear existing markers in ExampleGroup
   ExampleGroup.clearLayers();
 
-  // Add a new marker
-  marker = L.marker([lat, lng], { icon: customIcon() })
+  marker1 = L.marker([lat, lng], { icon: customIconOrigin() })
     .addTo(ExampleGroup)
     .bindPopup("<b>X: " + lng.toFixed(3) + " | Y: " + lat.toFixed(3) + "</b>");
 });
 
-// Event handler for form submission
-$("#formular").submit(function (event) {
-  event.preventDefault();
-  if ($.trim($("#xinput").val()) === "" || $.trim($("#yinput").val()) === "") {
-    alert("Please fill X and Y coords");
-    return false;
-  }
+// MAP 2 Marker
+var marker2;
 
-  var xpoz = $("#xinput").val();
-  var ypoz = $("#yinput").val();
+mymap.on("dblclick", function (e) {
+  var coord = e.latlng;
+  var lat = coord.lat;
+  var lng = coord.lng;
 
   ExampleGroup.clearLayers();
 
-  // Add a new marker
-  marker = L.marker([ypoz, xpoz], { icon: customIcon() })
+  marker2 = L.marker([lat, lng], { icon: customIconDestination() })
     .addTo(ExampleGroup)
-    .bindPopup("<b>X: " + xpoz + " | Y: " + ypoz + "</b>");
-
-  mymap.setView([ypoz, xpoz], mymap.getZoom());
-  $("#markerSkripta")
-    .empty()
-    .append("<script>" + marker + "</script>");
+    .bindPopup("<b>X: " + lng.toFixed(3) + " | Y: " + lat.toFixed(3) + "</b>");
 });
