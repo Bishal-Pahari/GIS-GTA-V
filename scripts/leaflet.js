@@ -46,15 +46,15 @@ var Icons = {
 
 var mymap = L.map("map", {
   crs: CUSTOM_CRS,
-  minZoom: 4.5,
+  minZoom: 3.5,
   maxZoom: 4.5,
-  Zoom: 4.5,
+  Zoom: 8,
   maxNativeZoom: 4.5,
   preferCanvas: true,
   layers: [AtlasStyle, Icons["Example"]], // Change the order to make AtlasStyle the default
   center: [0, 0],
   zoom: 4.5,
-  scrollWheelZoom: false,
+  scrollWheelZoom: true,
   zoomControl: false, // Remove zoom control
   attributionControl: false,
 });
@@ -78,7 +78,7 @@ function customIconOrigin() {
 function customIconDestination() {
   return L.icon({
     iconUrl: "./blips/3.png",
-    iconSize: [55, 55],
+    iconSize: [50, 50],
     iconAnchor: [30, 45],
     popupAnchor: [0, -30],
   });
