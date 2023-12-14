@@ -69,8 +69,8 @@ var layersControl = L.control
 function customIconOrigin() {
   return L.icon({
     iconUrl: "./blips/1.png",
-    iconSize: [55, 55],
-    iconAnchor: [30, 45],
+    iconSize: [40, 35],
+    iconAnchor: [30, 30],
     popupAnchor: [0, -30],
   });
 }
