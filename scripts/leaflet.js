@@ -70,7 +70,7 @@ function customIconOrigin() {
   return L.icon({
     iconUrl: "./blips/1.png",
     iconSize: [40, 35],
-    iconAnchor: [30, 30],
+    iconAnchor: [20, 20],
     popupAnchor: [0, -30],
   });
 }
