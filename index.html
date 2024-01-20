@@ -16,6 +16,9 @@
       crossorigin=""
     />
 
+    <!-- socket io  -->
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+
     <!-- font CDN  -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -40,6 +43,7 @@
       </div>
     </div>
 
+    <!-- jquery CDN  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- search Auto Suggestion -->
@@ -49,4 +53,14 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="./scripts/leaflet.js"></script>
   </body>
+
+  <script>
+    console.log("hello");
+    // Web Socket connection
+    const socket = io();
+
+    socket.on("connect", () => {
+      console.log("Connected to server");
+    });
+  </script>
 </html>

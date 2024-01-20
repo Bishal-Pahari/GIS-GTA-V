@@ -1,3 +1,21 @@
+// Socket conn
+
+const socket = io.connect("http://localhost:8000");
+
+socket.on("connect", () => {
+  console.log("Connected to the Socket.IO server");
+});
+
+socket.on("connect_error", (error) => {
+  console.error("Error connecting to the Socket.IO server:", error.message);
+});
+
+socket.on("disconnect", () => {
+  console.log("Disconnected from the Socket.IO server");
+});
+
+// Leaflet JS
+
 const center_x = 117.3;
 const center_y = 172.8;
 const scale_x = 0.02072;
@@ -66,49 +84,32 @@ var layersControl = L.control
   })
   .addTo(mymap);
 
-function customIconOrigin() {
-  return L.icon({
-    iconUrl: "./blips/1.png",
-    iconSize: [40, 35],
-    iconAnchor: [20, 20],
-    popupAnchor: [0, -30],
-  });
-}
-
-function customIconDestination() {
-  return L.icon({
-    iconUrl: "./blips/3.png",
-    iconSize: [50, 50],
-    iconAnchor: [30, 45],
-    popupAnchor: [0, -30],
-  });
-}
-
-// MAP 1 Marker
-var marker1;
-mymap.on("click", function (e) {
-  var coord = e.latlng;
-  var lat = coord.lat;
-  var lng = coord.lng;
-
-  ExampleGroup.clearLayers();
-
-  marker1 = L.marker([lat, lng], { icon: customIconOrigin() })
-    .addTo(ExampleGroup)
-    .bindPopup("<b>X: " + lng.toFixed(3) + " | Y: " + lat.toFixed(3) + "</b>");
+var icon1 = L.icon({
+  iconUrl: "./blips/3.png",
+  iconSize: [38, 40],
 });
 
-// MAP 2 Marker
-var marker2;
+var icon2 = L.icon({
+  iconUrl: "./blips/1.png",
+  iconSize: [45, 40],
+});
 
-mymap.on("dblclick", function (e) {
-  var coord = e.latlng;
-  var lat = coord.lat;
-  var lng = coord.lng;
+var marker1 = L.marker(null, { icon: icon1 });
+var marker2 = L.marker(null, { icon: icon2 });
 
-  ExampleGroup.clearLayers();
+mymap.on("click", function (e) {
+  var newLatLng = new L.LatLng(e.latlng.lat, e.latlng.lng);
+  marker1.setLatLng(newLatLng).addTo(mymap);
+  var data = { lat: e.latlng.lat, lng: e.latlng.lng };
 
-  marker2 = L.marker([lat, lng], { icon: customIconDestination() })
-    .addTo(ExampleGroup)
-    .bindPopup("<b>X: " + lng.toFixed(3) + " | Y: " + lat.toFixed(3) + "</b>");
+  console.log("Emitting marker1 data:", data);
+
+  socket.emit("marker1", data);
+});
+
+socket.on("marker2", function (data) {
+  var newLatLng = new L.LatLng(data.lat, data.lng);
+  marker2.setLatLng(newLatLng).addTo(mymap);
+
+  console.log("Received marker2 data:", data);
 });
