@@ -104,12 +104,15 @@ mymap.on("click", function (e) {
 
   console.log("Emitting marker1 data:", data);
 
-  socket.emit("marker1", data);
+  socket.emit("from_client_a_to_c", data);
 });
 
-socket.on("marker2", function (data) {
+socket.on("to_client_a", function (data) {
+  console.log(`Received from B: ${JSON.stringify(data)}`);
+
+  var dt = JSON.stringify(data);
   var newLatLng = new L.LatLng(data.lat, data.lng);
   marker2.setLatLng(newLatLng).addTo(mymap);
 
-  console.log("Received marker2 data:", data);
+  console.log("Received marker2 data:", dt);
 });
