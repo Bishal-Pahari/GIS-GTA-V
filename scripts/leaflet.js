@@ -111,7 +111,8 @@ socket.on("to_client_a", function (data) {
   console.log(`Received from B: ${JSON.stringify(data)}`);
 
   var dt = JSON.stringify(data);
-  var newLatLng = new L.LatLng(data.lat, data.lng);
+  var newLatLng = new L.LatLng(data.Y, data.X);
+
   marker2.setLatLng(newLatLng).addTo(mymap);
 
   console.log("Received marker2 data:", dt);
