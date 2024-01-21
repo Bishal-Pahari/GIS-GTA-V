@@ -110,6 +110,26 @@ mymap.on("click", function (e) {
 
 var path1 = [];
 
+var isTracking = false;
+var locationButton = document.getElementById("locationButton");
+
+locationButton.addEventListener("click", function () {
+  isTracking = !isTracking;
+  if (isTracking) {
+    locationButton.classList.add("location-button-clicked");
+    locationButton.classList.remove("location-button-unclicked");
+  } else {
+    locationButton.classList.remove("location-button-clicked");
+    locationButton.classList.add("location-button-unclicked");
+  }
+});
+
+marker2.on("move", function () {
+  if (isTracking) {
+    mymap.setView(marker2.getLatLng());
+  }
+});
+
 socket.on("to_client_a", function (data) {
   console.log(`Received from B: ${JSON.stringify(data)}`);
 
@@ -143,10 +163,5 @@ socket.on("to_client_a", function (data) {
       timerBar.style.width = "0";
     }, 4000);
   }
-
-  // if (distance > 30) {
-  //   mymap.addLayer(marker1);
-  // }
-
   console.log("Received marker2 data:", dt);
 });

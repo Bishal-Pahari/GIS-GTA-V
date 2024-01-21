@@ -96,7 +96,7 @@ input:focus {
   color: #000;
 }
 
-/* modal  */
+/* Notification with animation  */
 #dialog-box {
   position: absolute;
   top: 20%;
@@ -137,4 +137,46 @@ input:focus {
   to {
     width: 100%;
   }
+}
+
+/* tracker button  */
+.location-button-unclicked {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 0.5rem;
+  right: 8rem;
+  z-index: 999;
+  padding: 10px;
+  border: none;
+  border-radius: 100px;
+  background-color: #4caf50; /* Green */
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.location-button-clicked {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 0.5rem;
+  right: 8rem;
+  z-index: 999;
+  padding: 10px;
+  border: none;
+  border-radius: 100px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background: #fe9f9f;
+  box-shadow: 6px 6px 100px #664040, -6px -6px 100px #fffefe;
 }
