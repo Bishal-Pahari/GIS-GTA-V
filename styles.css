@@ -141,42 +141,52 @@ input:focus {
 
 /* tracker button  */
 .location-button-unclicked {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 60px;
   height: 60px;
   position: absolute;
   top: 0.5rem;
   right: 8rem;
   z-index: 999;
-  padding: 10px;
-  border: none;
   border-radius: 100px;
-  background-color: #4caf50; /* Green */
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  background: #4caf50;
   transition-duration: 0.4s;
   cursor: pointer;
+  border: 1px solid #161616;
 }
 
 .location-button-clicked {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 60px;
   height: 60px;
   position: absolute;
   top: 0.5rem;
   right: 8rem;
   z-index: 999;
-  padding: 10px;
-  border: none;
   border-radius: 100px;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
   transition-duration: 0.4s;
   cursor: pointer;
-  background: #fe9f9f;
-  box-shadow: 6px 6px 100px #664040, -6px -6px 100px #fffefe;
+  background: #f54b4b;
+  box-shadow: 6px 6px 100px #8f5e5e, -6px -6px 100px #fffefe;
+  animation: blink 0.2s linear 0s 2, glow 2s ease-in-out infinite;
+  animation-fill-mode: forwards;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    background-color: red;
+  }
+  50% {
+    background-color: transparent;
+  }
+}
+
+.location-icon-svg {
+  width: 40px;
+  height: 40px;
 }
