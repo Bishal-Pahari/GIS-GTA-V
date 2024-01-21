@@ -172,7 +172,7 @@ input:focus {
   cursor: pointer;
   background: #4caf50;
   box-shadow: 6px 6px 100px #86f770, -6px -6px 100px #fffefe;
-  animation: blink 0.2s linear 0s 2, glow 2s ease-in-out infinite;
+  animation: blink 0.2s linear 0s 5, glow 4s ease-in-out infinite;
   animation-fill-mode: forwards;
   border: none;
 }
