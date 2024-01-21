@@ -108,6 +108,8 @@ mymap.on("click", function (e) {
   socket.emit("from_client_a_to_c", data);
 });
 
+var path1 = [];
+
 socket.on("to_client_a", function (data) {
   console.log(`Received from B: ${JSON.stringify(data)}`);
 
@@ -115,6 +117,36 @@ socket.on("to_client_a", function (data) {
   var newLatLng = new L.LatLng(data.Y, data.X);
 
   marker2.setLatLng(newLatLng).addTo(mymap);
+
+  path1.push(newLatLng);
+
+  var marker1LatLng = marker1.getLatLng();
+  var marker2LatLng = marker2.getLatLng();
+
+  var distance = Math.sqrt(
+    Math.pow(marker2LatLng.lat - marker1LatLng.lat, 2) +
+      Math.pow(marker2LatLng.lng - marker1LatLng.lng, 2)
+  );
+
+  let dialogbox = document.getElementById("dialog-box");
+  let timerBar = document.getElementById("timer-bar");
+
+  console.log("Distance:", distance);
+  if (distance <= 30) {
+    mymap.removeLayer(marker1);
+    dialogbox.classList.remove("hidden-box");
+    dialogbox.classList.add("display-box");
+    timerBar.classList.add("animate");
+    setTimeout(function () {
+      dialogbox.classList.remove("display-box");
+      dialogbox.classList.add("hidden-box");
+      timerBar.style.width = "0";
+    }, 4000);
+  }
+
+  // if (distance > 30) {
+  //   mymap.addLayer(marker1);
+  // }
 
   console.log("Received marker2 data:", dt);
 });

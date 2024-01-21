@@ -95,3 +95,46 @@ input:focus {
   background-color: #e6f0ff;
   color: #000;
 }
+
+/* modal  */
+#dialog-box {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 18px;
+}
+
+.hidden-box {
+  display: none;
+}
+
+.display-box {
+  display: block;
+}
+
+#timer-bar {
+  border-radius: 10px;
+  height: 10px;
+  width: 0;
+  background-color: #f00; /* Change to desired color */
+}
+
+#timer-bar.animate {
+  animation: fill 4s linear;
+}
+
+@keyframes fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
