@@ -151,7 +151,7 @@ socket.on("to_client_a", function (data) {
   console.log("Distance:", distance);
   if (distance <= 30) {
     mymap.removeLayer(marker1);
-    dialogbox.classList.remove("hidden-box");
+    dialogbox.classList.remove("display-box");
     dialogbox.classList.add("display-box");
 
     setTimeout(function () {
