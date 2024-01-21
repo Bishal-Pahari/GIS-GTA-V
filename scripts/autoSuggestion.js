@@ -391,9 +391,13 @@ input.onkeyup = (e) => {
     emptyArray = suggestions.filter((data) => {
       return data.toLowerCase().startsWith(userData.toLowerCase());
     });
-    emptyArray = emptyArray.map((data) => {
-      return "<li>" + data + "</li>";
-    });
+    if (emptyArray.length === 0) {
+      emptyArray = ["No suggestion"];
+    } else {
+      emptyArray = emptyArray.map((data) => {
+        return "<li>" + data + "</li>";
+      });
+    }
     searchInput.classList.add("active");
     showSuggestions(emptyArray);
     let allList = resultBox.querySelectorAll("li");
@@ -419,7 +423,6 @@ function showSuggestions(list) {
 document.addEventListener("click", function (e) {
   const isClickInsideSearchInput = searchInput.contains(e.target);
   if (!isClickInsideSearchInput) {
-    // Clicked outside the search input, clear the results
     clearResults();
   }
 });
@@ -441,7 +444,6 @@ input.oninput = (e) => {
       allList[i].setAttribute("onclick", "select(this)");
     }
   } else {
-    // Input is empty, clear the results
     clearResults();
   }
 };
@@ -449,6 +451,25 @@ input.oninput = (e) => {
 function clearResults() {
   searchInput.classList.remove("active");
   resultBox.innerHTML = "";
+}
+
+function select(element) {
+  let selectUserData = element.textContent;
+  input.value = selectUserData;
+  searchInput.classList.remove("active");
+
+  let selectedLocation = locationsData.locations.find(
+    (location) => location.name === selectUserData
+  );
+  let coordinates = selectedLocation.coordinates;
+  localStorage.setItem("selectedLocation", JSON.stringify(coordinates));
+
+  console.log("Selected location coordinates:", coordinates);
+
+  var ChooseLocation = JSON.parse(localStorage.getItem("selectedLocation"));
+  var newLatLng = new L.LatLng(ChooseLocation.Y, ChooseLocation.X);
+  marker1.setLatLng(newLatLng).addTo(mymap);
+  console.log("Received marker2 data:", JSON.stringify(ChooseLocation));
 }
 
 function showSuggestions(list) {
