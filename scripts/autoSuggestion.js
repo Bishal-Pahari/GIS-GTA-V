@@ -423,7 +423,6 @@ function showSuggestions(list) {
 document.addEventListener("click", function (e) {
   const isClickInsideSearchInput = searchInput.contains(e.target);
   if (!isClickInsideSearchInput) {
-    // Clicked outside the search input, clear the results
     clearResults();
   }
 });
@@ -445,7 +444,6 @@ input.oninput = (e) => {
       allList[i].setAttribute("onclick", "select(this)");
     }
   } else {
-    // Input is empty, clear the results
     clearResults();
   }
 };
