@@ -453,6 +453,25 @@ function clearResults() {
   resultBox.innerHTML = "";
 }
 
+function select(element) {
+  let selectUserData = element.textContent;
+  input.value = selectUserData;
+  searchInput.classList.remove("active");
+
+  let selectedLocation = locationsData.locations.find(
+    (location) => location.name === selectUserData
+  );
+  let coordinates = selectedLocation.coordinates;
+  localStorage.setItem("selectedLocation", JSON.stringify(coordinates));
+
+  console.log("Selected location coordinates:", coordinates);
+
+  var ChooseLocation = JSON.parse(localStorage.getItem("selectedLocation"));
+  var newLatLng = new L.LatLng(ChooseLocation.Y, ChooseLocation.X);
+  marker1.setLatLng(newLatLng).addTo(mymap);
+  console.log("Received marker2 data:", JSON.stringify(ChooseLocation));
+}
+
 function showSuggestions(list) {
   let listData;
   if (!list.length) {
