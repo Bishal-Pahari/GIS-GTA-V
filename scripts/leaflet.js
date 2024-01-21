@@ -109,8 +109,6 @@ mymap.on("click", function (e) {
   socket.emit("from_client_a_to_c", data);
 });
 
-var path1 = [];
-
 var isTracking = false;
 var locationButton = document.getElementById("locationButton");
 
@@ -138,8 +136,6 @@ socket.on("to_client_a", function (data) {
   var newLatLng = new L.LatLng(data.Y, data.X);
 
   marker2.setLatLng(newLatLng).addTo(mymap);
-
-  path1.push(newLatLng);
 
   var marker1LatLng = marker1.getLatLng();
   var marker2LatLng = marker2.getLatLng();
