@@ -94,6 +94,7 @@ var icon1 = L.icon({
 var icon2 = L.icon({
   iconUrl: "./blips/1.png",
   iconSize: [45, 40],
+  iconAnchor: [20, 38],
 });
 
 var marker1 = L.marker(null, { icon: icon1 });
