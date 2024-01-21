@@ -88,6 +88,7 @@ var layersControl = L.control
 var icon1 = L.icon({
   iconUrl: "./blips/3.png",
   iconSize: [38, 40],
+  iconAnchor: [20, 35],
 });
 
 var icon2 = L.icon({
