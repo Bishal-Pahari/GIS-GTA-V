@@ -469,7 +469,12 @@ function select(element) {
   var ChooseLocation = JSON.parse(localStorage.getItem("selectedLocation"));
   var newLatLng = new L.LatLng(ChooseLocation.Y, ChooseLocation.X);
   marker1.setLatLng(newLatLng).addTo(mymap);
-  console.log("Received marker2 data:", JSON.stringify(ChooseLocation));
+
+  var data = { lat: ChooseLocation.Y, lng: ChooseLocation.X };
+
+  console.log("Emitting marker2 data:", data);
+
+  socket.emit("from_client_a_to_c", data);
 }
 
 function showSuggestions(list) {
