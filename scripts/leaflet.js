@@ -75,6 +75,7 @@ var mymap = L.map("map", {
   scrollWheelZoom: true,
   zoomControl: false, // Remove zoom control
   attributionControl: false,
+  updateWhenIdle: true,
 });
 
 var layersControl = L.control
