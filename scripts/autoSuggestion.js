@@ -391,9 +391,13 @@ input.onkeyup = (e) => {
     emptyArray = suggestions.filter((data) => {
       return data.toLowerCase().startsWith(userData.toLowerCase());
     });
-    emptyArray = emptyArray.map((data) => {
-      return "<li>" + data + "</li>";
-    });
+    if (emptyArray.length === 0) {
+      emptyArray = ["No suggestion"];
+    } else {
+      emptyArray = emptyArray.map((data) => {
+        return "<li>" + data + "</li>";
+      });
+    }
     searchInput.classList.add("active");
     showSuggestions(emptyArray);
     let allList = resultBox.querySelectorAll("li");
