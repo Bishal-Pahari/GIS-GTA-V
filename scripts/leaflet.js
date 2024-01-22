@@ -88,6 +88,7 @@ var layersControl = L.control
 var icon1 = L.icon({
   iconUrl: "./blips/3.png",
   iconSize: [38, 40],
+  iconAnchor: [20, 35],
 });
 
 var icon2 = L.icon({
@@ -108,6 +109,28 @@ mymap.on("click", function (e) {
   socket.emit("from_client_a_to_c", data);
 });
 
+var path1 = [];
+
+var isTracking = false;
+var locationButton = document.getElementById("locationButton");
+
+locationButton.addEventListener("click", function () {
+  isTracking = !isTracking;
+  if (isTracking) {
+    locationButton.classList.add("location-button-clicked");
+    locationButton.classList.remove("location-button-unclicked");
+  } else {
+    locationButton.classList.remove("location-button-clicked");
+    locationButton.classList.add("location-button-unclicked");
+  }
+});
+
+marker2.on("move", function () {
+  if (isTracking) {
+    mymap.setView(marker2.getLatLng());
+  }
+});
+
 socket.on("to_client_a", function (data) {
   console.log(`Received from B: ${JSON.stringify(data)}`);
 
@@ -116,5 +139,30 @@ socket.on("to_client_a", function (data) {
 
   marker2.setLatLng(newLatLng).addTo(mymap);
 
+  path1.push(newLatLng);
+
+  var marker1LatLng = marker1.getLatLng();
+  var marker2LatLng = marker2.getLatLng();
+
+  var distance = Math.sqrt(
+    Math.pow(marker2LatLng.lat - marker1LatLng.lat, 2) +
+      Math.pow(marker2LatLng.lng - marker1LatLng.lng, 2)
+  );
+
+  let dialogbox = document.getElementById("dialog-box");
+  let timerBar = document.getElementById("timer-bar");
+
+  console.log("Distance:", distance);
+  if (distance <= 30) {
+    mymap.removeLayer(marker1);
+    dialogbox.classList.remove("hidden-box");
+    dialogbox.classList.add("display-box");
+    timerBar.classList.add("animate");
+    setTimeout(function () {
+      dialogbox.classList.remove("display-box");
+      dialogbox.classList.add("hidden-box");
+      timerBar.style.width = "0";
+    }, 4000);
+  }
   console.log("Received marker2 data:", dt);
 });

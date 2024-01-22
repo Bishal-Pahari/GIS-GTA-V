@@ -95,3 +95,99 @@ input:focus {
   background-color: #e6f0ff;
   color: #000;
 }
+
+/* Notification with animation  */
+#dialog-box {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 18px;
+}
+
+.hidden-box {
+  display: none;
+}
+
+.display-box {
+  display: block;
+}
+
+#timer-bar {
+  border-radius: 10px;
+  height: 10px;
+  width: 0;
+  background-color: #f00; /* Change to desired color */
+}
+
+#timer-bar.animate {
+  animation: fill 4s linear;
+}
+
+@keyframes fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* tracker button  */
+.location-button-unclicked {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 0.5rem;
+  right: 8rem;
+  z-index: 999;
+  border-radius: 10px;
+  background: #4caf50;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border: 1px solid #161616;
+}
+
+.location-button-clicked {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 0.5rem;
+  right: 8rem;
+  z-index: 999;
+  border-radius: 50%;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background: #f54b4b;
+  box-shadow: 6px 6px 100px #8f5e5e, -6px -6px 100px #fffefe;
+  animation: blink 0.2s linear 0s 2, glow 2s ease-in-out infinite;
+  animation-fill-mode: forwards;
+  border: none;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    background-color: red;
+  }
+  50% {
+    background-color: transparent;
+  }
+}
+
+.location-icon-svg {
+  width: 40px;
+  height: 40px;
+}

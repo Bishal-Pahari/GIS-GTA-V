@@ -470,6 +470,8 @@ function select(element) {
   var newLatLng = new L.LatLng(ChooseLocation.Y, ChooseLocation.X);
   marker1.setLatLng(newLatLng).addTo(mymap);
 
+  mymap.setView(newLatLng, 8);
+
   var data = { lat: ChooseLocation.Y, lng: ChooseLocation.X };
 
   console.log("Emitting marker2 data:", data);
