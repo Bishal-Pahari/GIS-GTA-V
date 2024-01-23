@@ -151,7 +151,7 @@ input:focus {
   right: 8rem;
   z-index: 999;
   border-radius: 10px;
-  background: #4caf50;
+  background: #f54b4b;
   transition-duration: 0.4s;
   cursor: pointer;
   border: 1px solid #161616;
@@ -170,9 +170,9 @@ input:focus {
   border-radius: 50%;
   transition-duration: 0.4s;
   cursor: pointer;
-  background: #f54b4b;
-  box-shadow: 6px 6px 100px #8f5e5e, -6px -6px 100px #fffefe;
-  animation: blink 0.2s linear 0s 2, glow 2s ease-in-out infinite;
+  background: #4caf50;
+  box-shadow: 6px 6px 100px #86f770, -6px -6px 100px #fffefe;
+  animation: blink 0.2s linear 0s 5, glow 4s ease-in-out infinite;
   animation-fill-mode: forwards;
   border: none;
 }
@@ -180,7 +180,7 @@ input:focus {
 @keyframes blink {
   0%,
   100% {
-    background-color: red;
+    background-color: #4caf50;
   }
   50% {
     background-color: transparent;
@@ -190,4 +190,38 @@ input:focus {
 .location-icon-svg {
   width: 40px;
   height: 40px;
+}
+
+@media (max-width: 400px) {
+  .location-button-unclicked {
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    right: 0.6rem;
+    top: 6rem;
+  }
+
+  .location-button-clicked {
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    right: 0.6rem;
+    top: 6rem;
+    border: 1px solid #353535;
+  }
+
+  #dialog-box {
+    position: absolute;
+    top: 13.4rem;
+    left: 43%;
+    z-index: 999;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 1);
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 18px;
+  }
 }

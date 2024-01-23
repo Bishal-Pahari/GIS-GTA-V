@@ -94,6 +94,7 @@ var icon1 = L.icon({
 var icon2 = L.icon({
   iconUrl: "./blips/1.png",
   iconSize: [45, 40],
+  iconAnchor: [20, 38],
 });
 
 var marker1 = L.marker(null, { icon: icon1 });
@@ -108,8 +109,6 @@ mymap.on("click", function (e) {
 
   socket.emit("from_client_a_to_c", data);
 });
-
-var path1 = [];
 
 var isTracking = false;
 var locationButton = document.getElementById("locationButton");
@@ -139,8 +138,6 @@ socket.on("to_client_a", function (data) {
 
   marker2.setLatLng(newLatLng).addTo(mymap);
 
-  path1.push(newLatLng);
-
   var marker1LatLng = marker1.getLatLng();
   var marker2LatLng = marker2.getLatLng();
 
@@ -155,14 +152,15 @@ socket.on("to_client_a", function (data) {
   console.log("Distance:", distance);
   if (distance <= 30) {
     mymap.removeLayer(marker1);
-    dialogbox.classList.remove("hidden-box");
+    dialogbox.classList.remove("display-box");
     dialogbox.classList.add("display-box");
-    timerBar.classList.add("animate");
+
     setTimeout(function () {
       dialogbox.classList.remove("display-box");
       dialogbox.classList.add("hidden-box");
       timerBar.style.width = "0";
     }, 4000);
+    timerBar.classList.add("animate");
   }
   console.log("Received marker2 data:", dt);
 });
