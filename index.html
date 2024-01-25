@@ -22,8 +22,7 @@
       }
     </script>
 
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="./blips/2.png" />
+    <link rel="stylesheet" href="./src/styles/styles.css" />
 
     <!-- leaflet CSS  -->
     <link
@@ -48,7 +47,7 @@
     <link rel="manifest" href="/manifest.json" />
 
     <!-- favicon  -->
-    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="./src/assets/favicon.ico" type="image/x-icon" />
   </head>
   <body>
     <div id="map"></div>
@@ -77,27 +76,20 @@
     >
       <img
         class="location-icon-svg"
-        src="./assets/current-location.svg"
+        src="./src/assets/current-location.svg"
         alt="Current Location"
       />
     </button>
 
     <!-- jquery CDN  -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <!-- Leaflet JS  -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="./scripts/leaflet.js"></script>
+    <script src="./src/scripts/leaflet.js"></script>
+
     <!-- search Auto Suggestion -->
-    <script src="./scripts/autoSuggestion.js"></script>
+    <script src="./src/scripts/autoSuggestion.js"></script>
   </body>
-
-  <script>
-    console.log("hello");
-    // Web Socket connection
-    const socket = io();
-
-    socket.on("connect", () => {
-      console.log("Connected to server");
-    });
-  </script>
 </html>
