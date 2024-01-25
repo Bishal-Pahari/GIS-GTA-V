@@ -150,15 +150,15 @@ socket.on("to_client_a", function (data) {
   console.log("Distance:", distance);
   if (distance <= 30) {
     mymap.removeLayer(marker1);
-    dialogbox.classList.remove("display-box");
-    dialogbox.classList.add("display-box");
 
-    setTimeout(function () {
-      dialogbox.classList.remove("display-box");
-      dialogbox.classList.add("hidden-box");
-      timerBar.style.width = "0";
-    }, 4000);
+    dialogbox.classList.remove("hidden-box");
+    dialogbox.classList.add("display-box");
+    timerBar.style.width = "0";
     timerBar.classList.add("animate");
+  } else if (distance > 30) {
+    mymap.addLayer(marker1);
+    dialogbox.classList.remove("display-box");
+    dialogbox.classList.add("hidden-box");
   }
   console.log("Received marker2 data:", dt);
 });
