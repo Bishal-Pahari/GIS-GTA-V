@@ -76,32 +76,32 @@ var mymap = L.map("map", {
   updateWhenIdle: true,
 });
 
-var layersControl = L.control
+const layersControl = L.control
   .layers({
     Atlas: AtlasStyle,
     Satelite: SateliteStyle,
   })
   .addTo(mymap);
 
-var icon1 = L.icon({
+const icon1 = L.icon({
   iconUrl: "./blips/3.png",
   iconSize: [38, 40],
   iconAnchor: [20, 35],
 });
 
-var icon2 = L.icon({
+const icon2 = L.icon({
   iconUrl: "./blips/1.png",
   iconSize: [45, 40],
   iconAnchor: [20, 38],
 });
 
-var marker1 = L.marker(null, { icon: icon1 });
-var marker2 = L.marker(null, { icon: icon2 });
+const marker1 = L.marker(null, { icon: icon1 });
+const marker2 = L.marker(null, { icon: icon2 });
 
 mymap.on("click", function (e) {
-  var newLatLng = new L.LatLng(e.latlng.lat, e.latlng.lng);
+  const newLatLng = new L.LatLng(e.latlng.lat, e.latlng.lng);
   marker1.setLatLng(newLatLng).addTo(mymap);
-  var data = { lat: e.latlng.lat, lng: e.latlng.lng };
+  const data = { lat: e.latlng.lat, lng: e.latlng.lng };
 
   console.log("Emitting marker1 data:", data);
 
