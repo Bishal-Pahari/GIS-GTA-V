@@ -95,15 +95,15 @@ const icon2 = L.icon({
   iconAnchor: [20, 38],
 });
 
-const marker1 = L.marker(null, { icon: icon1 });
-const marker2 = L.marker(null, { icon: icon2 });
+const userMarker = L.marker(null, { icon: icon1 });
+const carMarker = L.marker(null, { icon: icon2 });
 
 mymap.on("click", function (e) {
   const newLatLng = new L.LatLng(e.latlng.lat, e.latlng.lng);
-  marker1.setLatLng(newLatLng).addTo(mymap);
+  userMarker.setLatLng(newLatLng).addTo(mymap);
   const data = { lat: e.latlng.lat, lng: e.latlng.lng };
 
-  console.log("Emitting marker1 data:", data);
+  console.log("Emitting userMarker data:", data);
 
   socket.emit("from_client_a_to_c", data);
 });
@@ -122,9 +122,9 @@ locationButton.addEventListener("click", function () {
   }
 });
 
-marker2.on("move", function () {
+carMarker.on("move", function () {
   if (isTracking) {
-    mymap.setView(marker2.getLatLng());
+    mymap.setView(carMarker.getLatLng());
   }
 });
 
@@ -134,14 +134,14 @@ socket.on("to_client_a", function (data) {
   var dt = JSON.stringify(data);
   var newLatLng = new L.LatLng(data.Y, data.X);
 
-  marker2.setLatLng(newLatLng).addTo(mymap);
+  carMarker.setLatLng(newLatLng).addTo(mymap);
 
-  var marker1LatLng = marker1.getLatLng();
-  var marker2LatLng = marker2.getLatLng();
+  var userMarkerLatLng = userMarker.getLatLng();
+  var carMarkerLatLng = carMarker.getLatLng();
 
   var distance = Math.sqrt(
-    Math.pow(marker2LatLng.lat - marker1LatLng.lat, 2) +
-      Math.pow(marker2LatLng.lng - marker1LatLng.lng, 2)
+    Math.pow(carMarkerLatLng.lat - userMarkerLatLng.lat, 2) +
+      Math.pow(carMarkerLatLng.lng - userMarkerLatLng.lng, 2)
   );
 
   let dialogbox = document.getElementById("dialog-box");
@@ -149,16 +149,16 @@ socket.on("to_client_a", function (data) {
 
   console.log("Distance:", distance);
   if (distance <= 30) {
-    mymap.removeLayer(marker1);
+    mymap.removeLayer(userMarker);
 
     dialogbox.classList.remove("hidden-box");
     dialogbox.classList.add("display-box");
     timerBar.style.width = "0";
     timerBar.classList.add("animate");
   } else if (distance > 30) {
-    mymap.addLayer(marker1);
+    mymap.addLayer(userMarker);
     dialogbox.classList.remove("display-box");
     dialogbox.classList.add("hidden-box");
   }
-  console.log("Received marker2 data:", dt);
+  console.log("Received carMarker data:", dt);
 });
