@@ -1,4 +1,4 @@
-const socket = io.connect("http://localhost:8000");
+const socket = io.connect("http://192.168.1.83:8000");
 
 socket.on("connect", () => {
   console.log("Connected to the Socket.IO server");
@@ -28,15 +28,15 @@ const CUSTOM_CRS = L.extend({}, L.CRS.Simple, {
     return Math.log(sc) / 0.6931471805599453;
   },
   distance: function (pos1, pos2) {
-    var x_difference = pos2.lng - pos1.lng;
-    var y_difference = pos2.lat - pos1.lat;
+    let x_difference = pos2.lng - pos1.lng;
+    let y_difference = pos2.lat - pos1.lat;
     return Math.sqrt(x_difference * x_difference + y_difference * y_difference);
   },
   transformation: new L.Transformation(scale_x, center_x, -scale_y, center_y),
   infinite: true,
 });
 
-var SateliteStyle = L.tileLayer("mapStyles/styleSatelite/{z}/{x}/{y}.jpg", {
+let SateliteStyle = L.tileLayer("mapStyles/styleSatelite/{z}/{x}/{y}.jpg", {
   minZoom: 0,
   maxZoom: 8,
   noWrap: true,
@@ -45,7 +45,7 @@ var SateliteStyle = L.tileLayer("mapStyles/styleSatelite/{z}/{x}/{y}.jpg", {
   id: "SateliteStyle map",
 });
 
-var AtlasStyle = L.tileLayer("mapStyles/styleAtlas/{z}/{x}/{y}.jpg", {
+let AtlasStyle = L.tileLayer("mapStyles/styleAtlas/{z}/{x}/{y}.jpg", {
   minZoom: 0,
   maxZoom: 5,
   noWrap: true,
@@ -54,13 +54,13 @@ var AtlasStyle = L.tileLayer("mapStyles/styleAtlas/{z}/{x}/{y}.jpg", {
   id: "styleAtlas map",
 });
 
-var ExampleGroup = L.layerGroup();
+let ExampleGroup = L.layerGroup();
 
-var Icons = {
+let Icons = {
   Example: ExampleGroup,
 };
 
-var mymap = L.map("map", {
+let mymap = L.map("map", {
   crs: CUSTOM_CRS,
   minZoom: 3.5,
   maxZoom: 4.5,
@@ -76,40 +76,40 @@ var mymap = L.map("map", {
   updateWhenIdle: true,
 });
 
-var layersControl = L.control
+let layersControl = L.control
   .layers({
     Atlas: AtlasStyle,
     Satelite: SateliteStyle,
   })
   .addTo(mymap);
 
-var icon1 = L.icon({
+let icon1 = L.icon({
   iconUrl: "./blips/3.png",
   iconSize: [38, 40],
   iconAnchor: [20, 35],
 });
 
-var icon2 = L.icon({
+let icon2 = L.icon({
   iconUrl: "./blips/1.png",
   iconSize: [45, 40],
   iconAnchor: [20, 38],
 });
 
-var marker1 = L.marker(null, { icon: icon1 });
-var marker2 = L.marker(null, { icon: icon2 });
+let marker1 = L.marker(null, { icon: icon1 });
+let marker2 = L.marker(null, { icon: icon2 });
 
 mymap.on("click", function (e) {
-  var newLatLng = new L.LatLng(e.latlng.lat, e.latlng.lng);
+  let newLatLng = new L.LatLng(e.latlng.lat, e.latlng.lng);
   marker1.setLatLng(newLatLng).addTo(mymap);
-  var data = { lat: e.latlng.lat, lng: e.latlng.lng };
+  let data = { lat: e.latlng.lat, lng: e.latlng.lng };
 
   console.log("Emitting marker1 data:", data);
 
   socket.emit("from_client_a_to_c", data);
 });
 
-var isTracking = false;
-var locationButton = document.getElementById("locationButton");
+let isTracking = false;
+let locationButton = document.getElementById("locationButton");
 
 locationButton.addEventListener("click", function () {
   isTracking = !isTracking;
@@ -131,15 +131,15 @@ marker2.on("move", function () {
 socket.on("to_client_a", function (data) {
   console.log(`Received from B: ${JSON.stringify(data)}`);
 
-  var dt = JSON.stringify(data);
-  var newLatLng = new L.LatLng(data.Y, data.X);
+  let dt = JSON.stringify(data);
+  let newLatLng = new L.LatLng(data.Y, data.X);
 
   marker2.setLatLng(newLatLng).addTo(mymap);
 
-  var marker1LatLng = marker1.getLatLng();
-  var marker2LatLng = marker2.getLatLng();
+  let marker1LatLng = marker1.getLatLng();
+  let marker2LatLng = marker2.getLatLng();
 
-  var distance = Math.sqrt(
+  let distance = Math.sqrt(
     Math.pow(marker2LatLng.lat - marker1LatLng.lat, 2) +
       Math.pow(marker2LatLng.lng - marker1LatLng.lng, 2)
   );
